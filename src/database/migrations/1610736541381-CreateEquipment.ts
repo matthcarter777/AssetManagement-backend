@@ -1,13 +1,12 @@
-import { MigrationInterface, QueryRunner, Table } from "typeorm";
+import { MigrationInterface, QueryRunner, Table, TableForeignKey } from "typeorm";
 
-export default class CreateType1610714727470 implements MigrationInterface {
+export class CreateEquipment1610736541381 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.query('CREATE EXTENSION IF NOT EXISTS "uuid-ossp"');
-
+        
         await queryRunner.createTable(
             new Table({
-                name: 'types',
+                name: 'equipments',
                 columns: [
                 {
                     name: 'id',
@@ -17,12 +16,20 @@ export default class CreateType1610714727470 implements MigrationInterface {
                     default: 'uuid_generate_v4()',
                 },
                 {
-                    name: 'name',
+                    name: 'description',
                     type: 'varchar',
                 },
                 {
-                    name: 'description',
+                    name: 'identification',
                     type: 'varchar',
+                },
+                {
+                    name: 'type_id',
+                    type: 'uuid',
+                },
+                {
+                    name: 'isAvailable',
+                    type: 'boolean',
                 },
                 {
                     name: 'created_at',
@@ -37,10 +44,21 @@ export default class CreateType1610714727470 implements MigrationInterface {
                 ]
             })
         )
+
+        await queryRunner.createForeignKey(
+            'equipments',
+            new TableForeignKey({
+              columnNames: ['type_id'],
+              referencedColumnNames: ['id'],
+              referencedTableName: 'types',
+              onDelete: 'SET NULL',
+              onUpdate: 'CASCADE',
+            }),
+          );
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.dropTable('types');
+        await queryRunner.dropTable('equipments');
     }
 
 }
