@@ -21,10 +21,6 @@ export default class CreateType1610714727470 implements MigrationInterface {
                     type: 'varchar',
                 },
                 {
-                    name: 'description',
-                    type: 'varchar',
-                },
-                {
                     name: 'created_at',
                     type: 'timestamp',
                     default: 'now()',
