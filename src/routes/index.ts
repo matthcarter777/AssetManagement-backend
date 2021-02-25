@@ -1,15 +1,9 @@
 import { Router } from 'express';
 
-import TypesRouter from '../routes/Types.routes';
-import EquipmentsRouter from '../routes/Equipments.routes';
+import typesRouter from './types.routes';
 
-const routes = Router();
+const router = Router();
 
-routes.use('/api/types', TypesRouter);
-routes.use('/api/equipments', EquipmentsRouter);
+router.use('/types', typesRouter);
 
-routes.get('/', (req, res) => {
-    res.status(200).send('Welcome to Assets Managements');
-});
-
-export default routes;
+export default router;
