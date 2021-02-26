@@ -1,6 +1,8 @@
 import { Request, Response } from 'express';
 import { getCustomRepository } from 'typeorm';
+
 import TypesRepository from '../repositories/TypesRepository';
+import TypeCreateService from '../services/TypeCreateService';
 
 class TypeController {
   async index(request: Request, respose: Response) {
@@ -18,13 +20,9 @@ class TypeController {
   async create(request: Request, respose: Response) {
     const { name } = request.body;
 
-    const typesRepository = getCustomRepository(TypesRepository);
-
-    const type = typesRepository.create({
-      name
-    });
-
-    await typesRepository.save(type);
+    const typeCreateService = new TypeCreateService();
+    
+    const type = await typeCreateService.execute(name);
     
     return respose.status(201).json(type);
   }
