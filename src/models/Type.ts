@@ -1,13 +1,26 @@
-import { uuid } from 'uuidv4';
+import { Column, CreateDateColumn, Entity, PrimaryColumn } from "typeorm";
+import { v4 as uuid } from 'uuid';
 
+@Entity("types")
 class Type {
-  id: string;
-  description: string;
+  
+  @PrimaryColumn()
+  readonly id: string;
 
-  constructor(description: string) {
-    this.id = uuid();
-    this.description = description;
+  @Column()
+  name: string;
+
+  @CreateDateColumn()
+  created_at: Date;
+
+  @CreateDateColumn()
+  updated_at: Date;
+
+  constructor() {
+    if(!this.id) {
+      this.id = uuid();
+    }
   }
-}
 
-export default Type;
+}
+ export { Type };

@@ -1,11 +1,15 @@
 import { Router } from 'express';
 
-import TypesController from '../controllers/TypesController';
+import TypeController from '../controllers/TypeController';
 
-const typesController = new TypesController();
+const typeController = new TypeController();
 
-const routes = Router();
+const router = Router();
 
-routes.post('/', typesController.create);
+router.get('/', typeController.index);
+router.post('/', typeController.create);
+router.get('/:id', typeController.show);
+router.put('/:id', typeController.update);
+router.delete('/:id', typeController.delete);
 
-export default routes;
+export default router;
