@@ -5,7 +5,7 @@ import router from './routes';
 import cors from 'cors';
  
 import './database';
-import { AppError } from './Errors/AppErro';
+import { AppError } from './Errors/AppError';
 
 const app = express();
 

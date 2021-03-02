@@ -1,6 +1,6 @@
 import { getCustomRepository } from 'typeorm';
 
-import { AppError } from '../Errors/AppErro';
+import { AppError } from '../Errors/AppError';
 
 import EquipmentRepository from '../repositories/EquipmentsRepository';
 
