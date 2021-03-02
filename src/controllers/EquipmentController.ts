@@ -9,13 +9,9 @@ class TypeController {
   async index(request: Request, response: Response) {
     const equipmentIndexService = new EquipmentIndexService();
 
-    const findEquipment = await equipmentIndexService.execute();
+    const equipment = await equipmentIndexService.execute();
 
-    if(!findEquipment){
-      return response.status(400).json({error: 'Not a result found'});
-    }
-
-    return response.status(201).json(findEquipment);
+    return response.status(201).json(equipment);
   }
 
   async create(request: Request, respose: Response) {
