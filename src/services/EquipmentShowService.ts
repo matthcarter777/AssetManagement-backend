@@ -21,7 +21,6 @@ class EquipmentShowService {
 
     return equipment;
   }
-
 }
 
 export default EquipmentShowService;

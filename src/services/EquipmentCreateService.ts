@@ -1,4 +1,3 @@
-import { response } from 'express';
 import { getCustomRepository } from 'typeorm';
 import { AppError } from '../Errors/AppErro';
 
