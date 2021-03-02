@@ -8,5 +8,6 @@ const equipmentController = new EquipmentController();
 
 router.get('/', equipmentController.index);
 router.post('/', equipmentController.create);
+router.get('/:id', equipmentController.show);
 
 export default router;

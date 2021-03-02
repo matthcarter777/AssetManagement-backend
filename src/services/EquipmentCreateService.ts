@@ -1,5 +1,6 @@
 import { response } from 'express';
 import { getCustomRepository } from 'typeorm';
+import { AppError } from '../Errors/AppErro';
 
 import EquipmentRepository from '../repositories/EquipmentsRepository';
 
@@ -9,18 +10,17 @@ interface EquipmentRequest {
   type_id: string,
 }
 
-class EquipmentIndexService {
+class EquipmentCreateService {
   async execute({ description, identification, type_id }: EquipmentRequest) {
 
     const equipmentRepository = getCustomRepository(EquipmentRepository);
 
-    const getEquipmentByIdentification = equipmentRepository.findOne({
+    const getEquipmentByIdentification = await equipmentRepository.findByIdentification(
       identification
-    });
+    );
 
     if(getEquipmentByIdentification) {
-      console.log('Equipamento ja dastrado!');
-      return;
+      throw new AppError('Epquipment already exist!');
     }
 
     const equipments = equipmentRepository.create({
@@ -36,4 +36,4 @@ class EquipmentIndexService {
 
 }
 
-export default EquipmentIndexService;
+export default EquipmentCreateService;

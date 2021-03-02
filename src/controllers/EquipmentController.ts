@@ -4,6 +4,7 @@ import { getCustomRepository } from 'typeorm';
 
 import EquipmentIndexService from '../services/EquipmentIndexService';
 import EquipmentCreateService from '../services/EquipmentCreateService';
+import EquipmentShowService from '../services/EquipmentShowService';
 
 class TypeController {
   async index(request: Request, response: Response) {
@@ -31,21 +32,16 @@ class TypeController {
     return respose.status(201).json(equipment);
   }
 
-  /* async show(request: Request, respose: Response) {
+  async show(request: Request, respose: Response) {
     const { id } = request.params;
 
-    const typesRepository = getCustomRepository(TypesRepository);
+    const equipmentShowService = new EquipmentShowService();
 
-    const findType = await typesRepository.findOne(id);
+    const findEquipment = await equipmentShowService.execute({id});
 
-    if(!findType){
-      return respose.status(400).json({error: 'Not a result found'});
-    }
-
-
-    return respose.status(200).json(findType);
+    return respose.status(200).json(findEquipment);
   }
-
+/* 
   async update(request: Request, respose: Response) {
     const { id } = request.params;
     const { name } = request.body;

@@ -1,3 +1,4 @@
+import { AppError } from './../Errors/AppErro';
 import { Request, Response } from 'express';
 import { getCustomRepository } from 'typeorm';
 
@@ -35,7 +36,7 @@ class TypeController {
     const findType = await typesRepository.findOne(id);
 
     if(!findType){
-      return response.status(400).json({error: 'Not a result found'});
+      throw new AppError('Not a result found');
     }
 
 
