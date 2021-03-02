@@ -5,29 +5,29 @@ import TypesRepository from '../repositories/TypesRepository';
 import TypeCreateService from '../services/TypeCreateService';
 
 class TypeController {
-  async index(request: Request, respose: Response) {
+  async index(request: Request, response: Response) {
     const typesRepository = getCustomRepository(TypesRepository);
 
     const findType = await typesRepository.find({});
 
     if(!findType){
-      return respose.status(400).json({error: 'Not a result found'});
+      return response.status(400).json({error: 'Not a result found'});
     }
 
-    return respose.status(201).json(findType);
+    return response.status(201).json(findType);
   }
 
-  async create(request: Request, respose: Response) {
+  async create(request: Request, response: Response) {
     const { name } = request.body;
 
     const typeCreateService = new TypeCreateService();
     
     const type = await typeCreateService.execute(name);
     
-    return respose.status(201).json(type);
+    return response.status(201).json(type);
   }
 
-  async show(request: Request, respose: Response) {
+  async show(request: Request, response: Response) {
     const { id } = request.params;
 
     const typesRepository = getCustomRepository(TypesRepository);
@@ -35,14 +35,14 @@ class TypeController {
     const findType = await typesRepository.findOne(id);
 
     if(!findType){
-      return respose.status(400).json({error: 'Not a result found'});
+      return response.status(400).json({error: 'Not a result found'});
     }
 
 
-    return respose.status(200).json(findType);
+    return response.status(200).json(findType);
   }
 
-  async update(request: Request, respose: Response) {
+  async update(request: Request, response: Response) {
     const { id } = request.params;
     const { name } = request.body;
 
@@ -51,17 +51,17 @@ class TypeController {
     const findType = await typesRepository.findOne(id);
 
     if(!findType){
-      return respose.status(400).json({error: 'Not a result found'});
+      return response.status(400).json({error: 'Not a result found'});
     }
 
     findType.name = name;
 
     await typesRepository.save(findType);
 
-    return respose.status(200).json(findType);
+    return response.status(200).json(findType);
   }
 
-  async delete(request: Request, respose: Response) {
+  async delete(request: Request, response: Response) {
     const { id } = request.params;
 
     const typesRepository = getCustomRepository(TypesRepository);
@@ -69,12 +69,12 @@ class TypeController {
     const findType = await typesRepository.findOne(id);
 
     if(!findType){
-      return respose.status(400).json({error: 'Not a result found'});
+      return response.status(400).json({error: 'Not a result found'});
     }
 
     await typesRepository.remove(findType);
 
-    return respose.status(200).json({
+    return response.status(200).json({
       message: 'Type deleted!'
     });
   }
