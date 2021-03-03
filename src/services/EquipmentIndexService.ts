@@ -1,6 +1,7 @@
 import { getCustomRepository } from 'typeorm';
 
 import EquipmentRepository from '../repositories/EquipmentsRepository';
+import TypeRepository from '../repositories/TypesRepository';
 
 interface EquipmentRequest {
   description: string,
@@ -10,11 +11,21 @@ interface EquipmentRequest {
 
 class EquipmentIndexService {
   async execute() {
-
     const equipmentRepository = getCustomRepository(EquipmentRepository);
+    const typeRepository = getCustomRepository(TypeRepository);
 
-    const equipments = equipmentRepository.find();
+    const equipmentsFind = await equipmentRepository.find();
+    const types = await typeRepository.find();  
 
+    const equipments = equipmentsFind.map(equipment => {
+      return {
+        description: equipment.description,
+        identification: equipment.identification,
+        type: types.find( type => type.id === equipment.type_id).name,
+        isAvailable: equipment.isAvailable === true ? 'Disponível' : 'Indisponivel'
+      }
+    })
+    
     return equipments;
   }
 

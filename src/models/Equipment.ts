@@ -1,5 +1,7 @@
-import { Column, CreateDateColumn, Entity, PrimaryColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryColumn } from "typeorm";
 import { v4 as uuid } from 'uuid';
+
+import { Type } from './Type';
 
 @Entity("equipments")
 class Equipment {
@@ -12,9 +14,13 @@ class Equipment {
 
   @Column()
   identification: string;
-
+  
   @Column()
   type_id: string;
+
+  @ManyToOne(() => Type)
+  @JoinColumn({ name: 'type_id' })
+  type: Type;
 
   @Column()
   isAvailable: boolean;
