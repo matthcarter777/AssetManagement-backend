@@ -1,21 +1,21 @@
-import { AppError } from './../Errors/AppError';
 import { Request, Response } from 'express';
 import { getCustomRepository } from 'typeorm';
 
 import TypesRepository from '../repositories/TypesRepository';
+
 import TypeCreateService from '../services/TypeCreateService';
+import TypeIndexService  from '../services/TypeIndexService';
+import TypeShowService   from '../services/TypeShowService';
+import TypeUpdateService from '../services/TypeUpdateService';
+import TypeDeleteService from '../services/TypeDeleteService';
 
 class TypeController {
   async index(request: Request, response: Response) {
-    const typesRepository = getCustomRepository(TypesRepository);
+    const typeIndexService = new TypeIndexService();
 
-    const findType = await typesRepository.find({});
+    const types = await typeIndexService.execute();
 
-    if(!findType){
-      return response.status(400).json({error: 'Not a result found'});
-    }
-
-    return response.status(201).json(findType);
+    return response.status(201).json(types);
   }
 
   async create(request: Request, response: Response) {
@@ -30,15 +30,9 @@ class TypeController {
 
   async show(request: Request, response: Response) {
     const { id } = request.params;
-
-    const typesRepository = getCustomRepository(TypesRepository);
-
-    const findType = await typesRepository.findOne(id);
-
-    if(!findType){
-      throw new AppError('Not a result found');
-    }
-
+    const typeShowService = new TypeShowService();
+    
+    const findType = await typeShowService.execute(id);
 
     return response.status(200).json(findType);
   }
@@ -47,33 +41,19 @@ class TypeController {
     const { id } = request.params;
     const { name } = request.body;
 
-    const typesRepository = getCustomRepository(TypesRepository);
+    const typeUpdateService = new TypeUpdateService();
 
-    const findType = await typesRepository.findOne(id);
+    const type = await typeUpdateService.execute(id, name);
 
-    if(!findType){
-      return response.status(400).json({error: 'Not a result found'});
-    }
-
-    findType.name = name;
-
-    await typesRepository.save(findType);
-
-    return response.status(200).json(findType);
+    return response.status(200).json(type);
   }
 
   async delete(request: Request, response: Response) {
     const { id } = request.params;
+    
+    const typeDeleteService = new TypeDeleteService();
 
-    const typesRepository = getCustomRepository(TypesRepository);
-
-    const findType = await typesRepository.findOne(id);
-
-    if(!findType){
-      return response.status(400).json({error: 'Not a result found'});
-    }
-
-    await typesRepository.remove(findType);
+    await typeDeleteService.execute(id);
 
     return response.status(200).json({
       message: 'Type deleted!'
