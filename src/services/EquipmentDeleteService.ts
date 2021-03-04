@@ -19,6 +19,10 @@ class EquipmentDeleteService {
       throw new AppError('Not a result found');
     }
 
+    if(findEquipment.isAvailable === false){
+      throw new AppError('Busy equipment');
+    }
+
     await equipmentsRepository.remove(findEquipment);
 
     return;
