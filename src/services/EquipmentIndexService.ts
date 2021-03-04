@@ -19,9 +19,11 @@ class EquipmentIndexService {
 
     const equipments = equipmentsFind.map(equipment => {
       return {
+        id: equipment.id,
         description: equipment.description,
         identification: equipment.identification,
         type: types.find( type => type.id === equipment.type_id).name,
+        type_id: equipment.type_id,
         isAvailable: equipment.isAvailable === true ? 'Disponível' : 'Indisponivel'
       }
     })
