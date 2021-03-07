@@ -19,8 +19,13 @@ app.use((err: Error, request: Request, response: Response, _next: NextFunction) 
       message: err.message
     });
   }
+
+  return response.status(500).json({
+    status: "Error",
+    message: `Internal server error ${err.message}`,
+  });
 });
 
-app.listen(3333, () => {
-  console.log('API Started On Port:3333!')
+app.listen(process.env.SERVER_PORT, () => {
+  console.log(`API Ster on port ${process.env.SERVER_PORT}!`)
 });

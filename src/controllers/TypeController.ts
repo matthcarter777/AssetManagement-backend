@@ -1,7 +1,4 @@
 import { Request, Response } from 'express';
-import { getCustomRepository } from 'typeorm';
-
-import TypesRepository from '../repositories/TypesRepository';
 
 import TypeCreateService from '../services/TypeCreateService';
 import TypeIndexService  from '../services/TypeIndexService';
