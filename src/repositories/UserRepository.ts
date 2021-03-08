@@ -19,6 +19,14 @@ class UserRepository extends Repository<User> {
 
     return find || undefined;
   }
+
+  public async findByEmail(email: string) {
+    const find = await this.ormRepository.findOne({
+      where: { email }
+    });
+
+    return find || undefined;
+  }
 }
 
 export default UserRepository;  
