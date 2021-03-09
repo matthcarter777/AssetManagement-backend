@@ -18,9 +18,11 @@ class EquipmentCreateService {
       identification
     );
 
-    if(getEquipmentByIdentification) {
+    if(getEquipmentByIdentification && 
+      getEquipmentByIdentification.type_id === type_id
+      ) {
       throw new AppError('Epquipment already exist!');
-    }
+    };
 
     const equipments = equipmentRepository.create({
       description,

@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 
 import UserCreateService from '../services/UserCreateService';
 import UserIndexService from '../services/UserIndexService';
+import UserShowService from '../services/UserShowService';
 
 class UserController {
   async index(request: Request, response: Response) {
@@ -24,6 +25,16 @@ class UserController {
       registration,
       password
     }) 
+
+    return response.status(201).json(user);
+  }
+
+  async show(request: Request, response: Response) {
+    const { id } = request.params;
+
+    const userService = new UserShowService();
+
+    const user = await userService.execute(id);
 
     return response.status(201).json(user);
   }
