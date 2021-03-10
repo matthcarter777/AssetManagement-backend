@@ -10,9 +10,6 @@ class UserDeleteService {
 
     const user = await userRepository.findById(id);
 
-    console.log(id)
-    console.log(user)
-
     if(!user) {
       throw new AppError('User not already exist!');
     };
