@@ -7,8 +7,8 @@ const lendingContractController = new LendingContractController();
 const router = Router();
 
 router.get('/', lendingContractController.index);
-/* router.post('/', typeController.create);
-router.get('/:id', typeController.show);
+router.post('/', lendingContractController.create);
+/* router.get('/:id', typeController.show);
 router.put('/:id', typeController.update);
 router.delete('/:id', typeController.delete);
  */

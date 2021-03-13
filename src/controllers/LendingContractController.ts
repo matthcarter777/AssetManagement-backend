@@ -1,21 +1,27 @@
 import { Request, Response } from 'express';
 
+import LendingContractCreateService from '../services/LendingContractCreateService';
+
 class LendingContractController {
   async index(request: Request, response: Response) {
     
     return response.status(201).json({ message: 'OK, Here!'});
   }
 
- /*  async create(request: Request, response: Response) {
-    const { name } = request.body;
+  async create(request: Request, response: Response) {
+    const { equipment_id, user_id } = request.body;
 
-    const typeCreateService = new TypeCreateService();
+    const lendingContractCreateService = new LendingContractCreateService();
     
-    const type = await typeCreateService.execute(name);
+    const lendingContract = await lendingContractCreateService.execute({
+      equipment_id,
+      user_id
+    });
     
-    return response.status(201).json(type);
+    return response.status(201).json(lendingContract);
   }
 
+  /* 
   async show(request: Request, response: Response) {
     const { id } = request.params;
     const typeShowService = new TypeShowService();
