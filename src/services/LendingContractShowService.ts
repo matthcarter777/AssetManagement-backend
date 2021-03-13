@@ -26,6 +26,8 @@ class LendingContractShowService {
       cpf: users.find(user => user.id === findLendingContract.user_id).cpf,
       equipment: equipment.find(equipment => equipment.id === findLendingContract.equipment_id).description,
       identification: equipment.find(equipment => equipment.id === findLendingContract.equipment_id).identification,
+      user_id: findLendingContract.user_id,
+      equipment_id: findLendingContract.equipment_id
     }
 
     return lendingContract;
