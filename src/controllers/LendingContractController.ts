@@ -1,11 +1,15 @@
 import { Request, Response } from 'express';
 
 import LendingContractCreateService from '../services/LendingContractCreateService';
+import LendingContractIndexService from '../services/LendingContractIndexService';
 
 class LendingContractController {
   async index(request: Request, response: Response) {
+    const lendingContractIndexService = new LendingContractIndexService();
+
+    const lendingContracts = await lendingContractIndexService.execute();
     
-    return response.status(201).json({ message: 'OK, Here!'});
+    return response.status(201).json(lendingContracts);
   }
 
   async create(request: Request, response: Response) {
