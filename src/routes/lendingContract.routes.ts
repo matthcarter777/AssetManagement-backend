@@ -9,7 +9,7 @@ const router = Router();
 router.get('/', lendingContractController.index);
 router.post('/', lendingContractController.create);
 router.get('/:id', lendingContractController.show);
-/* router.put('/:id', lendingContractController.update);
+router.put('/:id', lendingContractController.update);
 router.delete('/:id', lendingContractController.delete);
- */
+
 export default router;
