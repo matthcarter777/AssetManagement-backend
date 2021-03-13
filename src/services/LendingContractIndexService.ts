@@ -2,6 +2,7 @@ import { getCustomRepository } from 'typeorm';
 
 import EquipmentRepository from '../repositories/EquipmentsRepository';
 import LendingContractRepository from '../repositories/LendingContractRepository';
+import TypeRepository from '../repositories/TypesRepository';
 import UserRepository from '../repositories/UserRepository';
 
 class LendingContractIndexService {
@@ -9,10 +10,12 @@ class LendingContractIndexService {
     const lendingContractRepository = getCustomRepository(LendingContractRepository);
     const userRepository = getCustomRepository(UserRepository);
     const equipmentRepository = getCustomRepository(EquipmentRepository);
+    const typeRepository = getCustomRepository(TypeRepository)
 
     const lendingContracts =  await lendingContractRepository.find();
     const users = await userRepository.find();
     const equipment = await equipmentRepository.find();
+    const type = await typeRepository.find();
 
     const lendingContractFormat = lendingContracts.map(ct => {
       return {

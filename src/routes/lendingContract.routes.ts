@@ -8,8 +8,8 @@ const router = Router();
 
 router.get('/', lendingContractController.index);
 router.post('/', lendingContractController.create);
-/* router.get('/:id', typeController.show);
-router.put('/:id', typeController.update);
-router.delete('/:id', typeController.delete);
+router.get('/:id', lendingContractController.show);
+/* router.put('/:id', lendingContractController.update);
+router.delete('/:id', lendingContractController.delete);
  */
 export default router;
