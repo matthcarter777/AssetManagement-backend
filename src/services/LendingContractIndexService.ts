@@ -22,10 +22,12 @@ class LendingContractIndexService {
         id: ct.id,
         date: `${ct.date.getDate()}/${(ct.date.getMonth()+1)}/${ct.date.getFullYear()}`,
         name: users.find(user => user.id === ct.user_id).name,
-        CPF: users.find(user => user.id === ct.user_id).cpf,
+        cpf: users.find(user => user.id === ct.user_id).cpf,
         registration: users.find(user => user.id === ct.user_id).registration,
         equipment: equipment.find(equipment => equipment.id === ct.equipment_id).description,
         identification: equipment.find(equipment => equipment.id === ct.equipment_id).identification,
+        user_id: ct.user_id,
+        equipment_id: ct.equipment_id
       }
     })
 

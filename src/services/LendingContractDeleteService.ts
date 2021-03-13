@@ -13,7 +13,7 @@ class LendingContractDeleteService {
     const findLendingContract = await lendingContractRepository.findById(id);
 
     if(!findLendingContract) {
-      throw new AppError('Type not already exist!');
+      throw new AppError('Equipment not already exist!');
     };
 
     const findEquipment = await equipmentRepository.findOne({
