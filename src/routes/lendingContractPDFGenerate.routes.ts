@@ -6,6 +6,6 @@ const lendingContractController = new lendingContractGenerateDPFController();
 
 const router = Router();
 
-router.post('/', lendingContractController.create);
+router.post('/:id', lendingContractController.create);
 
 export default router;

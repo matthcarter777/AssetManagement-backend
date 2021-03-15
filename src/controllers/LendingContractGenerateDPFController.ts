@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 
-import LendingContractPDFCreate from '../services/LendingContractPDFcreate';
+import LendingContractPDFCreate from '../services/LendingContractPDFCreate';
 
 class LendingContractGenerateDPFController {
   async create(request: Request, response: Response) {
