@@ -25,8 +25,8 @@ class AuthenticateUserService {
     const user = await userRepository.findByEmail(email);
 
     if (!user) {
-      throw new AppError('Incorret email/password combination.', 401);
-  }
+      throw new AppError('Incorrect email/password combination.', 401);
+    }
 
     const passwordMatched = await hasProvider.compareHash(
       password,
@@ -34,7 +34,7 @@ class AuthenticateUserService {
     );
 
     if (!passwordMatched) {
-      throw new AppError('Incorret email/password combination.', 401);
+      throw new AppError('Incorrect email/password combination.', 401);
     }
 
     const { secret, expiresIn } = authConfig.jwt;
