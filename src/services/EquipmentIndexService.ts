@@ -24,7 +24,8 @@ class EquipmentIndexService {
         identification: equipment.identification,
         type: types.find( type => type.id === equipment.type_id).name,
         type_id: equipment.type_id,
-        isAvailable: equipment.isAvailable === true ? 'Disponível' : 'Indisponivel'
+        available: equipment.isAvailable === true ? 'Disponível' : 'Indisponivel',
+        isAvailable: equipment.isAvailable
       }
     })
     
