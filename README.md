@@ -28,16 +28,26 @@ Requisições seguem o padrão
 
 ## Resposta de requisição 
 
-Sucessso :
+Sucessso:
 
-POST => Rota : /equipments
+[POST] => Rota : /equipments (200)
+```sh
+  {
+    "id": "cbc38983-2410-4ef8-b05a-b253a23274b3",
+    "isAvailable": true,
+    "description": "Notebook Lenovo",
+    "identification": "NTBL001",
+    "type_id": "a7545650-c8ad-49b7-a615-0a81b7999a88",
+    "created_at": "2021-03-04T15:08:05.188Z",
+    "updated_at": "2021-03-04T15:08:05.188Z"
+  }
+```
 
- {
-  "id": "cbc38983-2410-4ef8-b05a-b253a23274b3",
-  "isAvailable": true,
-  "description": "Notebook Lenovo",
-  "identification": "NTBL001",
-  "type_id": "a7545650-c8ad-49b7-a615-0a81b7999a88",
-  "created_at": "2021-03-04T15:08:05.188Z",
-  "updated_at": "2021-03-04T15:08:05.188Z"
-}
+Erro:
+
+[POST] => Rota : /equipments (400)
+```sh
+  {
+    "message": "Equipment already exist!",
+  }
+```
