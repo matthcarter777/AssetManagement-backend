@@ -9,17 +9,34 @@ class DashboardIndexService {
     const typeRepository = getCustomRepository(TypeRepository);
 
     const equipmentsFind = await equipmentRepository.find();
-    const typesFind = await typeRepository.find();  
+    const typesFind = await typeRepository.find();
+    
+    const typesFiltered = typesFind.map(type => {
+      return {
+        name: type.name,
+        total: equipmentsFind.filter(equipment => equipment.type_id === type.id).length,
+        available: equipmentsFind.filter(equipment => equipment.type_id === type.id && equipment.isAvailable === true ).length,
+      }
+    })
+
+    console.log(typesFiltered)
+
+    /* Provisory search */
+    const notebookId = typesFind.find(type => type.name === 'Notebook').id;
+    const cellphoneId = typesFind.find(type => type.name === 'Celular').id;
+    const radioId = typesFind.find(type => type.name === 'Radio').id;
+    const chipId = typesFind.find(type => type.name === 'Chip').id;
+
 
     const equipments = {
-      radioTotal: equipmentsFind.filter(equipment => equipment.type_id === '9988dab9-b5e2-4ca6-a1a0-f5783916d41c').length,
-      radioAvailable: equipmentsFind.filter(equipment => equipment.type_id === '9988dab9-b5e2-4ca6-a1a0-f5783916d41c' && equipment.isAvailable === true ).length,
-      notebookTotal: equipmentsFind.filter(equipment => equipment.type_id === 'a7545650-c8ad-49b7-a615-0a81b7999a88').length,
-      notebookAvailable: equipmentsFind.filter(equipment => equipment.type_id === 'a7545650-c8ad-49b7-a615-0a81b7999a88' && equipment.isAvailable === true).length,
-      cellphoneTotal: equipmentsFind.filter(equipment => equipment.type_id === 'c33dde76-79d6-42e2-a312-4c3a7545df02').length,
-      cellphoneAvailable: equipmentsFind.filter(equipment => equipment.type_id === 'c33dde76-79d6-42e2-a312-4c3a7545df02' && equipment.isAvailable === true).length,
-      simTotal: equipmentsFind.filter(equipment => equipment.type_id === 'df30a5cb-3a53-4bc6-8263-d4ad6da15baf').length,
-      simAvailable: equipmentsFind.filter(equipment => equipment.type_id === 'df30a5cb-3a53-4bc6-8263-d4ad6da15baf' && equipment.isAvailable === true).length,
+      radioTotal: equipmentsFind.filter(equipment => equipment.type_id === radioId).length,
+      radioAvailable: equipmentsFind.filter(equipment => equipment.type_id === radioId && equipment.isAvailable === true ).length,
+      notebookTotal: equipmentsFind.filter(equipment => equipment.type_id === notebookId ).length,
+      notebookAvailable: equipmentsFind.filter(equipment => equipment.type_id === notebookId && equipment.isAvailable === true).length,
+      cellphoneTotal: equipmentsFind.filter(equipment => equipment.type_id === cellphoneId).length,
+      cellphoneAvailable: equipmentsFind.filter(equipment => equipment.type_id === cellphoneId && equipment.isAvailable === true).length,
+      simTotal: equipmentsFind.filter(equipment => equipment.type_id === chipId).length,
+      simAvailable: equipmentsFind.filter(equipment => equipment.type_id === chipId && equipment.isAvailable === true).length,
     }
     
     return equipments;
