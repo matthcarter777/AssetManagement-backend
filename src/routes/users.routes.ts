@@ -7,7 +7,7 @@ const userController = new UserController();
 
 const router = Router();
 
-//router.use(ensureAuthenticated)
+router.use(ensureAuthenticated);
 
 router.get('/', userController.index);
 router.post('/', userController.create);

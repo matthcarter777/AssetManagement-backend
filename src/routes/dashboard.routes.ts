@@ -1,10 +1,12 @@
 import { Router } from 'express';
 
 import DashboardController from '../controllers/DashboardController';
+import ensureAuthenticated from '../middlewares/ensureAuthenticated';
 
-const dashboardRouter = Router();
 const dashboardController = new DashboardController();
+const router = Router();
+router.use(ensureAuthenticated);
 
-dashboardRouter.get('/', dashboardController.index);
+router.get('/', dashboardController.index);
 
-export default dashboardRouter;
+export default router;

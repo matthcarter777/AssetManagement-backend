@@ -1,10 +1,11 @@
 import { Router } from 'express';
 
 import EquipmentController from '../controllers/EquipmentController';
-
-const router = Router();
+import ensureAuthenticated from '../middlewares/ensureAuthenticated';
 
 const equipmentController = new EquipmentController();
+const router = Router();
+router.use(ensureAuthenticated);
 
 router.get('/', equipmentController.index);
 router.post('/', equipmentController.create);
