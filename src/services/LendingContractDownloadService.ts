@@ -1,29 +1,40 @@
-import path from 'path';
-import mime from 'mime';
+import { getCustomRepository } from 'typeorm';
+
+import EquipmentRepository from '../repositories/EquipmentsRepository';
+import LendingContractRepository from '../repositories/LendingContractRepository';
+import TypeRepository from '../repositories/TypesRepository';
+import UserRepository from '../repositories/UserRepository';
 
 import { AppError } from './../Errors/AppError';
 
 
 class LendingContractDownloadService {
   async execute(id: string) {
+    const equipmentRepository = getCustomRepository(EquipmentRepository);
+    const lendingContractRepository = getCustomRepository(LendingContractRepository);
+    const userRepository = getCustomRepository(UserRepository);
 
-    const file = path.join(__dirname, `contracts/${id}.pdf`);
+    const findLendingContract = await lendingContractRepository.findById(id);
+    const users = await userRepository.find();
+    const equipment = await equipmentRepository.find();
 
-    const filename = await path.basename(file);
-    const mimetype = await mime.lookup(file);
-
-    if(!file) {
-      throw new AppError('File not already exist!');
+    if(!findLendingContract) {
+      throw new AppError('Lending contract not already exist!');
     };
 
-    const res = {
-      filename,
-      mimetype
+    const lendingContract = {
+      id: findLendingContract.id,
+      date: '03/04/2021',
+      name: users.find(user => user.id === findLendingContract.user_id).name,  
+      cpf: users.find(user => user.id === findLendingContract.user_id).cpf,
+      registration: users.find(user => user.id === findLendingContract.user_id).registration,
+      equipment: equipment.find(equipment => equipment.id === findLendingContract.equipment_id).description,
+      identification: equipment.find(equipment => equipment.id === findLendingContract.equipment_id).identification,
     }
     
-    return;
-  }
 
+    return lendingContract;
+  }
 }
 
 export default LendingContractDownloadService;

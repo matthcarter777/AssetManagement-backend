@@ -22,14 +22,11 @@ class LendingContractGenerateDPFController {
 
   async show(request: Request, response: Response) {
     const { id } = request.params;
-    
-    const file = path.join(__dirname, `../../contracts/${id}.pdf`);
-    
-    if(!file) {
-      throw new AppError('File not already exist!');
-    };
+    const lendingContractDownloadService  = new LendingContractDownloadService();
 
-    return response.download(file);
+    const contract = await lendingContractDownloadService.execute(id);
+
+    return response.status(200).json(contract);
   }
 }
 

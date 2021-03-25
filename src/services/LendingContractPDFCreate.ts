@@ -5,6 +5,7 @@ import HtmlPDFrovider from '../providers/implementations/HtmlPDFrovider';
 import LendingContractRepository from '../repositories/LendingContractRepository';
 import EquipmentRepository from '../repositories/EquipmentsRepository';
 import UserRepository from '../repositories/UserRepository';
+import dateFormate from '../shared/dateFormat';
 
 class LendingContractCreatePDFService {
   async execute(id) {
@@ -24,23 +25,13 @@ class LendingContractCreatePDFService {
 
     const lendingContract = {
       id: findLendingContract.id,
-      date: '03/04/2021',
+      date: dateFormate(findLendingContract.date),
       name: users.find(user => user.id === findLendingContract.user_id).name,  
       cpf: users.find(user => user.id === findLendingContract.user_id).cpf,
       registration: users.find(user => user.id === findLendingContract.user_id).registration,
       equipment: equipment.find(equipment => equipment.id === findLendingContract.equipment_id).description,
       identification: equipment.find(equipment => equipment.id === findLendingContract.equipment_id).identification,
     }
-
-/*   const LendingContract = {
-      id: 'HASUHAUSHUASHUAHSA',
-      date: '03/04/2021',
-      name: 'Mateus Henrique',
-      cpf: '064.492.521-38',
-      registration: '1601',
-      equipment: 'Lenovo E480',
-      identification: 'NTB001',
-    } */
 
     await pdfContractCreate.generateContract(lendingContract);
 
