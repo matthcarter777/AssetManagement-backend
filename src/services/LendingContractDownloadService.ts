@@ -2,8 +2,8 @@ import { getCustomRepository } from 'typeorm';
 
 import EquipmentRepository from '../repositories/EquipmentsRepository';
 import LendingContractRepository from '../repositories/LendingContractRepository';
-import TypeRepository from '../repositories/TypesRepository';
 import UserRepository from '../repositories/UserRepository';
+import dateFormate from '../shared/dateFormat';
 
 import { AppError } from './../Errors/AppError';
 
@@ -24,7 +24,7 @@ class LendingContractDownloadService {
 
     const lendingContract = {
       id: findLendingContract.id,
-      date: '03/04/2021',
+      date: dateFormate(findLendingContract.date),
       name: users.find(user => user.id === findLendingContract.user_id).name,  
       cpf: users.find(user => user.id === findLendingContract.user_id).cpf,
       registration: users.find(user => user.id === findLendingContract.user_id).registration,
