@@ -9,10 +9,16 @@ class TypeUpdateService {
     const typesRepository = getCustomRepository(TypesRepository);
 
     const typeFind = await typesRepository.findById(id);
+    const findTypeByName = await typesRepository.findByName(name);
 
     if(!typeFind) {
       throw new AppError('Type not already exist!');
     };
+
+    if(findTypeByName) {
+      throw new AppError('Type already exist!');
+    };
+
 
     typeFind.name = name;
 

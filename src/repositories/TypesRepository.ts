@@ -19,6 +19,14 @@ class TypeRepository extends Repository<Type> {
 
     return find || undefined;
   }
+
+  public async findByName(name: string) {
+    const find = await this.ormRepository.findOne({
+      where: { name }
+    });
+
+    return find || undefined;
+  }
 }
 
 export default TypeRepository;  
