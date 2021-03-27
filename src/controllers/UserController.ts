@@ -78,6 +78,25 @@ class UserController {
     });
   }
 
+  async config(request: Request, response: Response) {
+
+    const userService = new UserCreateService();
+
+    const userAdmin = {
+      name: 'Admin' ,
+      email: 'admin@admin.com',
+      cpf: '00000000000',
+      registration: '0000',
+      password: 'm!0l0553'
+    };
+
+    await userService.execute(userAdmin);
+
+    return response.status(201).json({
+      message: 'User Admin created!'
+    });
+  }
+
 }
 
 export default UserController;

@@ -14,5 +14,6 @@ router.post('/', userController.create);
 router.get('/:id', userController.show);
 router.put('/:id', userController.update);
 router.delete('/:id', userController.delete);
+router.post('/config', userController.config);
 
 export default router;
