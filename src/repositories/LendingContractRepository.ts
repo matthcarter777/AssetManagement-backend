@@ -2,7 +2,6 @@ import { EntityRepository, Repository, getRepository } from "typeorm";
 
 import { LendingContract } from "../models/LendingContract";
 
-
 @EntityRepository(LendingContract)
 class LendingContractRepository extends Repository<LendingContract> {
   private ormRepository: Repository<LendingContract>;

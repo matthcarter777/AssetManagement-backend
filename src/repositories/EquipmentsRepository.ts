@@ -1,8 +1,6 @@
 import { EntityRepository, Repository, getRepository } from "typeorm";
 import { Equipment } from "../models/Equipment";
 
-
-
 @EntityRepository(Equipment)
 class EquipmentRepository extends Repository<Equipment> {
   private ormRepository: Repository<Equipment>;
@@ -29,4 +27,4 @@ class EquipmentRepository extends Repository<Equipment> {
   }
 }
 
-export default EquipmentRepository;  
+export default EquipmentRepository; 

@@ -2,7 +2,6 @@ import { EntityRepository, Repository, getRepository } from "typeorm";
 
 import { User } from "../models/User";
 
-
 @EntityRepository(User)
 class UserRepository extends Repository<User> {
   private ormRepository: Repository<User>;
@@ -29,4 +28,4 @@ class UserRepository extends Repository<User> {
   }
 }
 
-export default UserRepository;  
+export default UserRepository; 
