@@ -40,3 +40,4 @@ class Equipment {
 
 }
  export { Equipment };
+ 
