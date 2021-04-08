@@ -10,5 +10,6 @@ router.use(ensureAuthenticated);
 
 router.post('/:id', lendingContractController.create);
 router.get('/:id', lendingContractController.show);
+router.get('/download/:id', lendingContractController.download);
 
 export default router;

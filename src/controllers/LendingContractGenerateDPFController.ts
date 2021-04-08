@@ -28,6 +28,19 @@ class LendingContractGenerateDPFController {
 
     return response.status(200).json(contract);
   }
+
+  async download(request: Request, response: Response) {
+    const { id } = request.params;
+    
+    const fileName = `${id}.pdf`;
+
+    console.log(id);
+
+
+    const contractArchive = path.join(__dirname, '..', '..', 'contracts', fileName);
+
+    return response.status(200).download(contractArchive);
+  }
 }
 
 export default LendingContractGenerateDPFController;
