@@ -20,6 +20,9 @@ class User {
   registration: string;
 
   @Column()
+  position: string;
+
+  @Column()
   password: string;
 
   @CreateDateColumn()

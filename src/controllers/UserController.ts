@@ -16,7 +16,7 @@ class UserController {
   }
 
   async create(request: Request, response: Response) {
-    const { name, email, cpf, registration, password } = request.body;
+    const { name, email, cpf, registration, position, password } = request.body;
 
     const userService = new UserCreateService();
 
@@ -25,6 +25,7 @@ class UserController {
       email,
       cpf,
       registration,
+      position,
       password
     }) 
 
@@ -48,6 +49,7 @@ class UserController {
       email,
       cpf,
       registration,
+      position,
       password
     } = request.body;
 
@@ -59,6 +61,7 @@ class UserController {
       email,
       cpf,
       registration,
+      position,
       password
      });
 
@@ -87,6 +90,7 @@ class UserController {
       email: 'admin@admin.com',
       cpf: '00000000000',
       registration: '0000',
+      position: 'admin',
       password: 'm!0l0553'
     };
 
