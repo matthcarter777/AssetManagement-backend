@@ -6,9 +6,11 @@ import TypesRepository from '../repositories/TypesRepository';
 class TypeCreateService {
   async execute(name: string) {
 
+    console.log(name);
     const typesRepository = getCustomRepository(TypesRepository);
-
-    const findTypeByName = typesRepository.findByName(name);
+    
+    const findTypeByName = await typesRepository.findByName(name);
+    console.log(findTypeByName);
     
     if( findTypeByName ) {
       throw new AppError('Type already exists!');

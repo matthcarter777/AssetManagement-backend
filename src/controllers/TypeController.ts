@@ -17,6 +17,7 @@ class TypeController {
 
   async create(request: Request, response: Response) {
     const { name } = request.body;
+    console.log(name);
 
     const typeCreateService = new TypeCreateService();
     
