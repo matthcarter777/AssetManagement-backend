@@ -3,6 +3,7 @@ import { Request, Response } from 'express';
 import LendingContractCreateService from '../services/LendingContractCreateService';
 import LendingContractDeleteService from '../services/LendingContractDeleteService';
 import LendingContractIndexService from '../services/LendingContractIndexService';
+import LendingContractCreatePDFService from '../services/LendingContractPDFCreate';
 import LendingContractShowService from '../services/LendingContractShowService';
 import LendingContractUpdateService from '../services/LendingContractUpdateService';
 
@@ -19,12 +20,15 @@ class LendingContractController {
     const { equipment_id, user_id } = request.body;
 
     const lendingContractCreateService = new LendingContractCreateService();
+    const lendingContractPDFCreateService = new LendingContractCreatePDFService();
     
     const lendingContract = await lendingContractCreateService.execute({
       equipment_id,
       user_id
     });
     
+    await lendingContractPDFCreateService.execute(lendingContract.id);
+
     return response.status(201).json(lendingContract);
   }
 
