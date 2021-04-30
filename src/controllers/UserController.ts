@@ -8,7 +8,7 @@ import UserUpdateService from '../services/UserUpdateService';
 
 class UserController {
   async index(request: Request, response: Response) {
-    const userService = new UserIndexService;
+    const userService = new UserIndexService();
 
     const user = await userService.execute()
 
